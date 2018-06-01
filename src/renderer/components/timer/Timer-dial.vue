@@ -53,11 +53,10 @@ export default {
 
     dialClass () {
       return 'Dial-fill--work'
-    },
+    }
+  },
 
-    methods: {
-    },
-
+  methods: {
     mounted () {
       // this.dialAnimation(this.timeWork)
       EventBus.$on('timer-started', () => {

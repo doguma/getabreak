@@ -4,6 +4,18 @@
 
 <script>
 import { EventBus } from '@/utils/event-bus'
+import axios from 'axios'
+const notifiers = require('node-notifier')
+const path = require('path')
+
+// const $http = require('https')
+
+notifiers.notify(
+  {
+    icon: path.join('static', 'tomato.png'),
+    wait: true
+  }
+)
 
 export default {
   computed: {
@@ -36,6 +48,22 @@ export default {
   mounted () {
     EventBus.$on('timer-completed', () => {
       EventBus.$emit('timer-finished')
+      axios.get("https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='TIMES UP. you may have some fun nowww")
+      notifiers.notify({
+        title: 'uh',
+        message: 'hello',
+        icon: path.join('static', 'tomato.png'),
+        wait: true
+      })
+
+      notifiers.on('click', function (notifierObject, options) {
+        notifiers.notify({
+          title: 'why',
+          message: 'why',
+          icon: path.join('static', 'crushed_tomato.png'),
+          timeout: 5
+        })
+      })
       this.dispatchTimer()
     })
   }

@@ -48,6 +48,7 @@ import appAudio from '@/components/Audio'
 import appTimerController from '@/components/timer/Timer-controller'
 import appTimerDial from '@/components/timer/Timer-dial'
 import { EventBus } from '@/utils/event-bus'
+import axios from 'axios'
 
 export default {
   components: {
@@ -150,6 +151,7 @@ export default {
     pauseTimer () {
       this.timer.pause()
       this.timerActive = !this.timerActive
+      axios.get("https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='timer paused'")
     },
 
     resetTimer () {
@@ -161,12 +163,14 @@ export default {
     resumeTimer () {
       this.timer.resume()
       this.timerActive = true
+      axios.get("https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='timer resumes :>'")
     },
 
     startTimer () {
       this.timer.start()
       this.timerActive = true
       this.timerStarted = true
+      axios.get("https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='timer startsss, concentrate on your work!'")
     }
   },
 

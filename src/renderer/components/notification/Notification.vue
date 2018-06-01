@@ -2,10 +2,11 @@
 </template>
 
 <script>
-import { EventBus } from '@/utils/event-bus'
+// import { EventBus } from '@/utils/event-bus'
 const path = require('path')
-
+// const notifier = require('node-notifier')
 export default {
+
   name: 'Notification',
 
   data () {
@@ -23,31 +24,30 @@ export default {
       this.notification = new Notification(opts.title, {
         body: opts.body,
         icon: opts.icon,
-        silent: true,
-        position: opts.position
+        silent: true
       })
     },
     notifyWork2 () {
       this.callNotification({
-        title: 'notifywork2',
+        title: 'title',
         body: 'hehe',
+        position: 'top left',
         icon: path.join('static', 'tomato.png')
       })
     }
   },
 
   mounted () {
-    EventBus.$on('ready-long-break', this.notifyWork2)
-    EventBus.$on('ready-short-break', this.notifyWork2)
-    EventBus.$on('ready-work', this.notifyWork2)
-    EventBus.$on('timer-finished', this.notifyWork2)
+    // notifier.notify({
+    //   title: 'hellooo', message: 'testing', wait: true, time: 300000, type: 'warn'})
+
+    // notifier.on('click', function (notifierObject, options) {
+    //   EventBus.$emit('timer-init')
+    // })
   },
 
   beforeDestroy () {
-    EventBus.$off('ready-long-break', this.notifyWork2)
-    EventBus.$off('ready-short-break', this.notifyWork2)
-    EventBus.$off('ready-work', this.notifyWork2)
-    EventBus.$off('timer-finished', this.notifyWork2)
+    // EventBus.$off('timer-finished', notifier.notify())
     // EventBus.$off('ready-long-break', this.notifyLongBreak)
     // EventBus.$off('ready-work', this.notifyWork)
   }
