@@ -19,12 +19,26 @@
         </div>
       </div>
     </div>
+  <br/>
+  <div class="Setting-wrapper">
+    <p class="Drawer-heading">Telegram message</p>
+    <br />
+
+  <form @submit.prevent="addId()">
+    <input v-model="name" type="text" placeholder="your telegram ID">
+    <button type="submit"> add </button>
+  </form>
+  </div>
 
   </div>
 </template>
 
 <script>
 import { EventBus } from '@/utils/event-bus'
+// import VueLocalStorage from 'vue-localstorage'
+
+// Vue.use(VueLocalStorage)
+import { db } from '../../main'
 
 export default {
   name: 'Drawer-timer',
@@ -36,12 +50,26 @@ export default {
       localTimeWork: 0,
       localWorkRounds: 0,
       maxTime: 120,
-      maxRounds: 12
+      maxRounds: 12,
+      userId: '',
+      message: 'hello'
     }
   },
-
+  // firebase: {
+  //   items: db.ref('telegramIds'),
+  //   itemsObj: {
+  //     source: db.ref('telegramIds'),
+  //     asObject: true
+  //   }
+  // },
   computed: {
     // store getters
+    created () {
+      // let item = this.itemsObj[this.$route.params.id]
+      // this.newItem = {
+      //   name: item.name
+      // }
+    },
     currentRound () {
       return this.$store.getters.currentRound
     },
@@ -56,6 +84,18 @@ export default {
   },
 
   methods: {
+    // set_data: function () {
+    //   Vue.localStorage.set('telegramId', this.message)
+    //   this.message = this.get_data()
+    // },
+    // get_data: function () {
+    //   return Vue.localStorage.get('telegramId')
+    // },
+    addId () {
+      // this.$firebaseRefs.items.child(this.$route.params.id).set(this.newItem)
+      db.collection('telegramIds').doc('idName').update({name: this.name})
+      // serverBus.$emit('telegramId', this.lsValue)
+    },
     calcPercentage (val, max) {
       return val / max * 100
     },

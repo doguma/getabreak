@@ -49,6 +49,7 @@ import appTimerController from '@/components/timer/Timer-controller'
 import appTimerDial from '@/components/timer/Timer-dial'
 import { EventBus } from '@/utils/event-bus'
 import axios from 'axios'
+import { db, serverBus } from '../../main'
 
 export default {
   components: {
@@ -62,11 +63,21 @@ export default {
       minutes: 1,
       timer: null,
       timerActive: false,
-      timerStarted: false
+      timerStarted: false,
+      telegramId: ''
     }
   },
+  // firebase: {
 
+  // },
   computed: {
+    create () {
+      db.collection('telegramIds').doc('idName').ref.get().then((doc) => {
+        this.telegramId = doc.data().name
+        serverBus.$emit('telegramId', this.telegramId)
+      })
+      this.telegramId = serverBus.$on('telegramId')
+    },
     currentRound () {
       return this.$store.getters.currentRound
     },
@@ -151,7 +162,8 @@ export default {
     pauseTimer () {
       this.timer.pause()
       this.timerActive = !this.timerActive
-      axios.get("https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='timer paused'")
+      axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=${this.telegramId}&text='timer paused'`)
+      // axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='timer paused'`)
     },
 
     resetTimer () {
@@ -163,14 +175,16 @@ export default {
     resumeTimer () {
       this.timer.resume()
       this.timerActive = true
-      axios.get("https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='timer resumes :>'")
+      axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=${this.telegramId}&text='timer resumes'`)
+      // axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='timer resumes :>'`)
     },
 
     startTimer () {
       this.timer.start()
       this.timerActive = true
       this.timerStarted = true
-      axios.get("https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='timer startsss, concentrate on your work!'")
+      axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=${this.telegramId}&text='timer starts!'`)
+      // axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='timer starts!'`)
     }
   },
 
