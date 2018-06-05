@@ -5,7 +5,6 @@ const localStore = createLocalStore()
 const state = {
   round: 1,
   workRounds: parseInt(localStore.get('workRounds')),
-  timeLongBreak: parseInt(localStore.get('timeLongBreak')),
   timeShortBreak: parseInt(localStore.get('timeShortBreak')),
   timeWork: parseInt(localStore.get('timeWork')),
   currentRound: 'work', // work, short-break, long-break
@@ -13,8 +12,17 @@ const state = {
 }
 
 const getters = {
+  round () {
+    return state.round
+  },
+  workRounds () {
+    return state.workRounds
+  },
   timeWork () {
     return state.timeWork
+  },
+  timeShortBreak () {
+    return state.timeShortBreak
   },
   currentRound () {
     return state.currentRound
@@ -26,12 +34,20 @@ const getters = {
 
 const mutations = {
 
+  SET_CURRENT_ROUND (state, payload) {
+    state.currentRound = payload
+  },
+
   RESET_ROUND (state) {
     state.round = 1
   },
 
   SET_TIME_WORK (state, payload) {
     state.timeWork = payload
+  },
+
+  SET_TIME_SHORT_BREAK (state, payload) {
+    state.timeShortBreak = payload
   },
 
   SET_WORK_ROUNDS (state, payload) {
@@ -59,6 +75,11 @@ const actions = {
   setTimeWork ({ commit }, payload) {
     commit('SET_TIME_WORK', payload)
     localStore.set('timeWork', payload)
+  },
+
+  setTimeShortBreak ({ commit }, payload) {
+    commit('SET_TIME_SHORT_BREAK', payload)
+    localStore.set('timeShortBreak', payload)
   },
 
   setWorkRounds ({ commit }, payload) {

@@ -1,6 +1,6 @@
 <template>
   <div class="Container">
-    <p class="Drawer-heading">Timer</p>
+    <p class="Drawer-heading">Work</p>
     <div class="Setting-wrapper">
       <p class="Setting-value">{{ localTimeWork + ':00' }}</p>
       <div class="Slider-wrapper">
@@ -19,7 +19,29 @@
         </div>
       </div>
     </div>
-  <br/>
+
+    <div class="Setting-wrapper">
+      <p class="Drawer-heading">Break</p>
+        <div class="Setting-wrapper">
+        <p class="Setting-value">{{ localTimeShortBreak + ':00' }}</p>
+        <div class="Slider-wrapper">
+          <input 
+            type="range" 
+            min="1" 
+            :max="maxTime" 
+            step="1" 
+            class="Slider Slider--green" 
+            v-model.number="localTimeShortBreak"
+            @change="setTimeShortBreak($event, 'short-break')"
+          >
+          <div 
+            class="Slider-bar Slider-bar--green" 
+            :style="{ width: calcPercentage(localTimeShortBreak, maxTime) + '%' }">
+          </div>
+        </div>
+      </div>
+    </div>
+
   <div class="Setting-wrapper">
     <p class="Drawer-heading">Telegram message</p>
     <br />
@@ -35,6 +57,7 @@
 
 <script>
 import { EventBus } from '@/utils/event-bus'
+import axios from 'axios'
 // import VueLocalStorage from 'vue-localstorage'
 
 // Vue.use(VueLocalStorage)
@@ -78,6 +101,10 @@ export default {
       return this.$store.getters.timeWork
     },
 
+    timeShortBreak () {
+      return this.$store.getters.timeShortBreak
+    },
+
     workRounds () {
       return this.$store.getters.workRounds
     }
@@ -94,6 +121,7 @@ export default {
     addId () {
       // this.$firebaseRefs.items.child(this.$route.params.id).set(this.newItem)
       db.collection('telegramIds').doc('idName').update({name: this.name})
+      axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=${this.telegramId}&text='timer paused'`)
       // serverBus.$emit('telegramId', this.lsValue)
     },
     calcPercentage (val, max) {
@@ -141,6 +169,11 @@ export default {
 
     setTimeWork (e, setting) {
       this.$store.dispatch('setTimeWork', e.target.value)
+      this.checkToResetTimer(setting)
+    },
+
+    setTimeShortBreak (e, setting) {
+      this.$store.dispatch('setTimeShortBreak', e.target.value)
       this.checkToResetTimer(setting)
     }
   },
@@ -209,6 +242,14 @@ export default {
   }
 }
 
+.Slider--green {
+  &::-webkit-slider-thumb {
+    background-color: $colorGreen;
+    border: 2px solid $colorGreen;
+    -webkit-app-region: no-drag;
+  }
+}
+
 .Slider-bar {
   position: absolute;
   top: calc(50% + 3px);
@@ -217,5 +258,9 @@ export default {
 
 .Slider-bar--red {
   background-color: $colorRed;
+}
+
+.Slider-bar--green {
+  background-color: $colorGreen;
 }
 </style>

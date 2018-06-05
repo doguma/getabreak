@@ -1,7 +1,7 @@
 <template>
   <div class="Dial-wrapper">
     <slot></slot>
-    <p class="Dial-label">until break</p>
+    <p class="Dial-label">{{ currentRoundDisplay }}</p>
     <svg 
       version="1.2" 
       baseProfile="tiny" 
@@ -13,7 +13,7 @@
       xml:space="preserve"
       width="220"
       height="220"
-      class="Dial-fill"
+      class="Dial-bg"
       :class="dialClass"
     > 
       <path 
@@ -51,8 +51,24 @@ export default {
       return this.$store.getters.timeWork * 60 * 1000
     },
 
+    timeShortBreak () {
+      return this.$store.getter.timeShortBreak * 60 * 1000
+    },
+
+    currentRoundDisplay () {
+      if (this.currentRound === 'work') {
+        return 'UNTIL BREAK'
+      } else if (this.currentRound === 'short-break') {
+        return 'break time'
+      }
+    },
+
     dialClass () {
-      return 'Dial-fill--work'
+      if (this.currentRound === 'work') {
+        return 'Dial-bg--work'
+      } else if (this.currentRound === 'short-break') {
+        return 'Dial-bg--shortBreak'
+      }
     }
   },
 
@@ -100,14 +116,19 @@ export default {
   stroke: $colorBlueGrey;
 }
 
+.Dial-bg--work{
+  stroke: $colorBlueGrey;
+}
+
+.Dial-bg--shortBreak{
+  stroke: $colorGreen;
+}
+
 .Dial-fill {
   position: relative;
   transform-origin: center;
   -webkit-app-region: no-drag;
 }
 
-.Dial-fill-work{
-  stroke: $colorRed;
-}
 
 </style>

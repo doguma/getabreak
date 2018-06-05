@@ -2,8 +2,8 @@
   <div class="Timer-wrapper">
     <app-audio/>
     <app-timer-dial :minutes="minutes">
-      <p class="Dial-time" v-if="!timerStarted">{{ prettyMinutes }}</p>
-      <p class="Dial-time" v-else>{{ prettyTime }}</p>
+      <p class="Dial-time" :class="dialClass" v-if="!timerStarted">{{ prettyMinutes }}</p>
+      <p class="Dial-time" :class="dialClass" v-else>{{ prettyTime }}</p>
     </app-timer-dial>
 
     <section class="Container Button-wrapper">
@@ -50,6 +50,7 @@ import appTimerDial from '@/components/timer/Timer-dial'
 import { EventBus } from '@/utils/event-bus'
 import axios from 'axios'
 import { db, serverBus } from '../../main'
+const notifiers = require('node-notifier')
 
 export default {
   components: {
@@ -82,18 +83,25 @@ export default {
       return this.$store.getters.currentRound
     },
 
-    round () {
-      return this.$store.getters.round
-    },
-
     timeWork () {
       return this.$store.getters.timeWork
+    },
+
+    timeShortBreak () {
+      return this.$store.getters.timeShortBreak
     },
 
     workRound () {
       return this.$store.getters.workRounds
     },
 
+    dialClass () {
+      if (this.currentRound === 'work') {
+        return 'Dial-time--work'
+      } else if (this.currentRound === 'short-break') {
+        return 'Dial-time--shortBreak'
+      }
+    },
     // local
     prettyMinutes () {
       return this.minutes + ':00'
@@ -155,19 +163,26 @@ export default {
     },
 
     initTimer () {
-      this.minutes = this.timeWork
-      this.createTimer(this.timeWork)
+      switch (this.currentRound) {
+        case 'work':
+          this.minutes = this.timeWork
+          this.createTimer(this.timeWork)
+          break
+        case 'short-break':
+          this.minutes = this.timeShortBreak
+          this.createTimer(this.timeShortBreak)
+          break
+      }
     },
 
     pauseTimer () {
       this.timer.pause()
       this.timerActive = !this.timerActive
-      axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=${this.telegramId}&text='timer paused'`)
-      // axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='timer paused'`)
+      axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='timer paused'`)
     },
 
     resetTimer () {
-      this.timer.reset()
+      this.createTimer(this.timeWork)
       this.timerActive = !this.timerActive
       this.timerStarted = false
     },
@@ -175,16 +190,19 @@ export default {
     resumeTimer () {
       this.timer.resume()
       this.timerActive = true
-      axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=${this.telegramId}&text='timer resumes'`)
-      // axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='timer resumes :>'`)
+      axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='timer resumes'`)
     },
 
     startTimer () {
       this.timer.start()
       this.timerActive = true
       this.timerStarted = true
-      axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=${this.telegramId}&text='timer starts!'`)
-      // axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='timer starts!'`)
+      axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='${this.currentRound} starts'`)
+      notifiers.notify({
+        title: `${this.currentRound} starts`,
+        message: 'begin',
+        wait: true
+      })
     }
   },
 
@@ -195,7 +213,13 @@ export default {
       // clear previous timers
       this.timer.reset()
       this.initTimer()
-      this.timerActive = false
+      if (opts.auto) {
+        setTimeout(() => {
+          this.startTimer()
+        }, 1500)
+      } else {
+        this.timerActive = false
+      }
     })
 
     EventBus.$on('call-timer-reset', () => {
@@ -244,6 +268,20 @@ export default {
   position: absolute;
   color: #00BFFF;
 }
+.Dial-time--work {
+  font-family: 'Pacifico', sans-serif;
+  font-size: 60px;
+  margin: 0;
+  position: absolute;
+  color: #00BFFF;  
+}
+.Dial-time--shortBreak{
+  font-family: 'Pacifico', sans-serif;
+  font-size: 60px;
+  margin: 0;
+  position: absolute;
+  color: $colorGreen;  
+}
 
 .Timer-wrapper {
   display: flex;
@@ -262,4 +300,5 @@ export default {
       fill: $colorRed;
     }
 }
+
 </style>

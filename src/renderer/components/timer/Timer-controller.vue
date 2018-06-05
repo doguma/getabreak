@@ -35,6 +35,16 @@ export default {
   },
 
   methods: {
+    checkRound () {
+      if (this.currentRound === 'work') {
+        this.$store.dispatch('setCurrentRound', 'short-break')
+        EventBus.$emit('ready-short-break')
+      } else if (this.currentRound === 'short-break') {
+        this.$store.dispatch('setCurrentRound', 'work')
+        EventBus.$emit('ready-work')
+      }
+      this.dispatchTimer()
+    },
     dispatchTimer () {
       EventBus.$emit('timer-init', {
         auto: this.autoStartTimer
@@ -44,22 +54,15 @@ export default {
 
   mounted () {
     EventBus.$on('timer-completed', () => {
-      EventBus.$emit('timer-finished')
-      axios.get("https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='TIMES UP. you may have some fun nowww")
+      axios.get(`https://api.telegram.org/bot607705815:AAFccf8ImMduAmTMpYA8zRFHcbvwLBB3haY/sendmessage?chat_id=561683539&text='${this.currentRound} time OVER.'`)
       notifiers.notify({
-        title: `time's up`,
-        message: 'well done!',
+        title: `${this.currentRound} OVER`,
+        message: 'reminder',
         wait: true
       })
-
       notifiers.on('click', function (notifierObject, options) {
-        notifiers.notify({
-          title: 'why',
-          message: 'why',
-          timeout: 5
-        })
       })
-      this.dispatchTimer()
+      this.checkRound()
     })
   }
 }
