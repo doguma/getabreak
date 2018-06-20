@@ -12,7 +12,7 @@
 
 
 - timer overview
-![Alt text](relative/path/to/getabreak_overview.png?raw=true "Title")
+![Alt Text](https://j.gifs.com/N9r3qN.gif)
 
 
 - desktop notification
