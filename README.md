@@ -16,11 +16,12 @@
 
 
 - desktop notification
--- starting work timer
-![Alt text](relative/path/to/getabreak_work.png?raw=true "Title")
 
--- end of work timer/ start of break
+![Alt text](relative/path/to/getabreak_work.png?raw=true "Title")
+starting work timer
+
 ![Alt text](relative/path/to/getabreak_break.png?raw=true "Title")
+end of work timer/ start of break
 
 
 * Mobile notification integrated with telegram API
