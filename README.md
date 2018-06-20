@@ -7,14 +7,14 @@
 
 ## Features
 
-- timer settings
+### timer settings
 ![Optional Text](../master/getabreak_settings.png)
 
-- timer overview
+### timer overview
 ![Alt Text](https://j.gifs.com/nrAnxY.gif)
 
 
-- desktop notification
+### desktop notification
 
 ![Optional Text](../master/getabreak_work.png)
 starting work timer
@@ -23,12 +23,12 @@ starting work timer
 end of work timer/ start of break
 
 
-* Mobile notification integrated with telegram API
+### Mobile notification integrated with telegram API
 ![Optional Text](../master/getabreak_telegramOverview.png)
 ![Optional Text](../master/getabreak_breakStarts.png)
 
 
-### Build Setup
+## Build Setup
 
 ```bash
 # install dependencies
