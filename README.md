@@ -24,8 +24,8 @@ end of work timer/ start of break
 
 
 ### Mobile notification integrated with telegram API
-![Optional Text](../master/getabreak_telegramOverview.png)
-![Optional Text](../master/getabreak_breakStarts.png)
+![Optional Text](../master/getabreak_telegramOverview.jpeg)
+![Optional Text](../master/getabreak_breakStarts.jpeg)
 
 
 ## Build Setup
