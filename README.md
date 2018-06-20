@@ -5,9 +5,28 @@
 
 - simplified and modifed from original desktop app Pomotroid by [Christopher Murphy](https://github.com/Splode)
 
-## Added Features
+## Features
+
+- timer settings
+![Alt text](relative/path/to/getabreak_settings.png?raw=true "Title")
+
+
+- timer overview
+![Alt text](relative/path/to/getabreak_overview.png?raw=true "Title")
+
+
+- desktop notification
+(starting work timer)
+![Alt text](relative/path/to/getabreak_work.png?raw=true "Title")
+
+(end of work timer/ start of break)
+![Alt text](relative/path/to/getabreak_break.png?raw=true "Title")
+
 
 * Mobile notification integrated with telegram API
+![Alt text](relative/path/to/getabreak_telegramOverview.jpeg?raw=true "Title")
+![Alt text](relative/path/to/getabreak_breakStarts.jpeg?raw=true "Title")
+
 
 ### Build Setup
 
