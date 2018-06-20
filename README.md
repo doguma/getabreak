@@ -23,6 +23,7 @@
 
 
 ### Mobile notification integrated with telegram API
+![test image size](../master/getabreak_telegramOverview.jpeg){:height="50%" width="50%"}
 ![Optional Text](../master/getabreak_telegramOverview.jpeg){:height="50%" width="50%"}
 ![Optional Text](../master/getabreak_breakStarts.jpeg){:height="50%" width="50%"}
 
