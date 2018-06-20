@@ -9,7 +9,7 @@
 
 ### timer settings
 ![Alt Text](https://j.gifs.com/2vpz8j.gif)
-
+- adding telegram ID function has not been implemented yet
 
 ### timer overview
 ![Alt Text](https://j.gifs.com/nrAnxY.gif)
