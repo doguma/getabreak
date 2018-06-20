@@ -8,7 +8,8 @@
 ## Features
 
 ### timer settings
-![Optional Text](../master/getabreak_settings.png)
+![Alt Text](https://j.gifs.com/2vpz8j.gif)
+
 
 ### timer overview
 ![Alt Text](https://j.gifs.com/nrAnxY.gif)
@@ -23,11 +24,14 @@
 
 
 ### Mobile notification integrated with telegram API
+<div class="inline-block">
 <img src="../master/getabreak_telegramOverview.jpeg" width="200">
-<img src="../master/getabreak_breakStarts.jpeg" width="200">
+  </div>
+  <div class="inline-block">
 
-![Optional Text](../master/getabreak_telegramOverview.jpeg){:height="50%" width="50%"}
-![Optional Text](../master/getabreak_breakStarts.jpeg){:height="50%" width="50%"}
+<img src="../master/getabreak_breakStarts.jpeg" width="200">
+  </div>
+
 
 
 ## Build Setup
