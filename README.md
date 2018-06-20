@@ -1,13 +1,13 @@
+# "Get a break"
 
+- Desktop web app
+- Provides manual timer setting & notification both on desktop and mobile (telegram)
 
-## Overview
+- simplified and modifed from original desktop app Pomotroid by [Christopher Murphy](https://github.com/Splode)
 
-simplified and modifed from original desktop app Pomotroid by [Christopher Murphy](https://github.com/Splode)
+## Added Features
 
-## Features
-
-* Basic desktop timer app
-* Desktop notifications
+* Mobile notification integrated with telegram API
 
 ### Build Setup
 
@@ -18,14 +18,12 @@ npm i
 # serve with hot reload at localhost:9080
 npm run dev
 
-# build Pomotroid for production
+# build for production
 npm run build
 ```
 
 ## License
 
 MIT &copy; [Christopher Murphy](https://github.com/Splode)
-
-# getabreakk
 
 modified by Hannah Do (https://github.com/doguma)
