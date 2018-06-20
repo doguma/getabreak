@@ -8,7 +8,7 @@
 ## Features
 
 - timer settings
-![Optional Text](../master/myFolder/getabreak_settings.png)
+![Optional Text](../master/getabreak_settings.png)
 
 - timer overview
 ![Alt Text](https://j.gifs.com/nrAnxY.gif)
@@ -16,16 +16,16 @@
 
 - desktop notification
 
-![Optional Text](../master/myFolder/getabreak_work.png)
+![Optional Text](../master/getabreak_work.png)
 starting work timer
 
-![Optional Text](../master/myFolder/getabreak_break.png)
+![Optional Text](../master/getabreak_break.png)
 end of work timer/ start of break
 
 
 * Mobile notification integrated with telegram API
-![Optional Text](../master/myFolder/getabreak_telegramOverview.png)
-![Optional Text](../master/myFolder/getabreak_breakStarts.png)
+![Optional Text](../master/getabreak_telegramOverview.png)
+![Optional Text](../master/getabreak_breakStarts.png)
 
 
 ### Build Setup
