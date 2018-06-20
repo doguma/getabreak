@@ -15,17 +15,16 @@
 
 
 ### desktop notification
-
+#### starting work timer
 ![Optional Text](../master/getabreak_work.png)
-starting work timer
 
+#### end of work timer/ start of break
 ![Optional Text](../master/getabreak_break.png)
-end of work timer/ start of break
 
 
 ### Mobile notification integrated with telegram API
-![Optional Text](../master/getabreak_telegramOverview.jpeg)
-![Optional Text](../master/getabreak_breakStarts.jpeg)
+![Optional Text](../master/getabreak_telegramOverview.jpeg){:height="50%" width="50%"}
+![Optional Text](../master/getabreak_breakStarts.jpeg){:height="50%" width="50%"}
 
 
 ## Build Setup
