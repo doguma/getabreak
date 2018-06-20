@@ -24,14 +24,8 @@
 
 
 ### Mobile notification integrated with telegram API
-<div class="inline-block">
-<img src="../master/getabreak_telegramOverview.jpeg" width="200">
-  </div>
-  <div class="inline-block">
 
-<img src="../master/getabreak_breakStarts.jpeg" width="200">
-  </div>
-
+<img src="../master/getabreak_telegramOverview.jpeg" width="200"> <img src="../master/getabreak_breakStarts.jpeg" width="200">
 
 
 ## Build Setup
