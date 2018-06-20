@@ -16,10 +16,10 @@
 
 
 - desktop notification
-(starting work timer)
+-- starting work timer
 ![Alt text](relative/path/to/getabreak_work.png?raw=true "Title")
 
-(end of work timer/ start of break)
+-- end of work timer/ start of break
 ![Alt text](relative/path/to/getabreak_break.png?raw=true "Title")
 
 
